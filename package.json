@@ -28,11 +28,11 @@
     "jshint-stylish": "^0.4.0",
     "run-sequence": "^0.3.6",
     "sinon": "^1.10.3",
+    "hoist-context": "git://github.com/hoist/hoist-context",
     "sinon-chai": "^2.5.0"
   },
   "dependencies": {
     "broker": "git://github.com/hoist/broker",
-    "hoist-context": "git://github.com/hoist/hoist-context",
     "uuid": "^2.0.1"
   }
 }
