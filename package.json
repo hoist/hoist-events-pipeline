@@ -32,7 +32,7 @@
     "sinon-chai": "^2.5.0"
   },
   "dependencies": {
-    "broker": "git://github.com/hoist/broker",
+    "broker": "git://github.com/hoist/broker#feature/sqs_messaging",
     "uuid": "^2.0.1"
   }
 }
