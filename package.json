@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "broker": "git://github.com/hoist/broker",
+    "hoist-logger": "git://github.com/hoist/hoist-logger",
     "uuid": "^2.0.1"
   }
 }
