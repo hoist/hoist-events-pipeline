@@ -1,5 +1,5 @@
 {
-  "name": "hoist-events-pipeline",
+  "name": "@hoist/events-pipeline",
   "version": "1.0.0",
   "description": "Hoist's events pipeline",
   "main": "./lib/pipeline.js",
@@ -16,7 +16,13 @@
     "url": "https://github.com/hoist/hoist-events-pipeline/issues"
   },
   "homepage": "https://github.com/hoist/hoist-events-pipeline",
+  "peerDependencies": {
+    "@hoist/context": "^1.0.1",
+    "@hoist/model": "^1.0.2"
+  },
   "devDependencies": {
+    "@hoist/context": "^1.0.1",
+    "@hoist/model": "^1.0.2",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "gulp": "^3.8.8",
@@ -28,12 +34,11 @@
     "jshint-stylish": "^0.4.0",
     "run-sequence": "^0.3.6",
     "sinon": "^1.10.3",
-    "hoist-context": "git://github.com/hoist/hoist-context",
     "sinon-chai": "^2.5.0"
   },
   "dependencies": {
-    "broker": "git://github.com/hoist/broker",
-    "hoist-logger": "git://github.com/hoist/hoist-logger",
+    "@hoist/broker": "^1.0.0",
+    "@hoist/logger": "^1.0.0",
     "uuid": "^2.0.1"
   }
 }
