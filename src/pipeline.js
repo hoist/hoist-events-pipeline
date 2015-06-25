@@ -30,7 +30,7 @@ class Pipeline {
    * @
    */
   raise(eventName, payload, overrideContext) {
-    return Context.get().bind(this).then(function (context) {
+    return Context.get().then((context) => {
       var cid;
       if (context.event) {
         cid = context.event.correlationId;
@@ -60,7 +60,7 @@ class Pipeline {
         payload: payload
       });
 
-      return this.publisher.publish(ev).then(function () {
+      return this._publisher.publish(ev).then(function () {
         return ev.toObject();
       });
     });
