@@ -31,7 +31,7 @@
   <h2>Class</h2>
   <ul>
     
-  <li data-ice="classDoc"><span><a href="class/src/pipeline.js~Pipeline.html">Pipeline</a></span></li>
+  <li data-ice="classDoc"><span><a href="class/src/pipeline.js~EventsPipeline.html">EventsPipeline</a></span></li>
 </ul>
 </div>
 
@@ -43,7 +43,13 @@
 
 
 
-
+<div data-ice="externalWrap">
+  <h2>External</h2>
+  <ul>
+    
+  <li data-ice="externalDoc"><span><a href="https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js">Context</a></span></li>
+</ul>
+</div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">tests/unit_tests/pipeline_tests.js</h1>
@@ -67,30 +73,29 @@ from &apos;@hoist/model&apos;;
 /** @test {Pipeline} */
 describe(&apos;Pipeline&apos;, () =&gt; {
   describe(&apos;Pipeline#raise&apos;, () =&gt; {
-    let initialContext;
+    let context;
     let pipeline;
     before(() =&gt; {
       Sinon.stub(Publisher.prototype, &apos;publish&apos;).returns(Promise.resolve(null));
       pipeline = new Pipeline();
-      return Context.get().then((context) =&gt; {
-        context.event = {
+      context = new Context({
+        event: {
           correlationId: &apos;correlation-id&apos;
-        };
-        context.bucket = {
+        },
+        bucket: {
           _id: &apos;bucket-id&apos;
-        };
-        context.application = {
+        },
+        application: {
           _id: &apos;application-id&apos;
-        };
-        context.environment = &apos;environment&apos;;
-        initialContext = context;
+        },
+        environment: &apos;environment&apos;
       });
 
     });
     describe(&apos;without context overrid&apos;, () =&gt; {
       let result;
       before(() =&gt; {
-        return pipeline.raise(&apos;my-event&apos;, {
+        return pipeline.raise(context, &apos;my-event&apos;, {
           payloadValue: true
         }).then((res) =&gt; {
           result = res;
@@ -126,16 +131,16 @@ describe(&apos;Pipeline&apos;, () =&gt; {
       let result;
       let ev;
       before(() =&gt; {
-        ev = initialContext.event;
-        delete initialContext.event;
-        return pipeline.raise(&apos;my-event&apos;, {
+        ev = context.event;
+        delete context.event;
+        return pipeline.raise(context, &apos;my-event&apos;, {
           payloadValue: true
         }).then((res) =&gt; {
           result = res;
         });
       });
       after(() =&gt; {
-        initialContext.event = ev;
+        context.event = ev;
       });
       it(&apos;generates a new correlationId&apos;, () =&gt; {
         return expect(result.correlationId).to.exist;
@@ -145,16 +150,16 @@ describe(&apos;Pipeline&apos;, () =&gt; {
       let result;
       let bucket;
       before(() =&gt; {
-        bucket = initialContext.bucket;
-        delete initialContext.bucket;
-        return pipeline.raise(&apos;my-event&apos;, {
+        bucket = context.bucket;
+        delete context.bucket;
+        return pipeline.raise(context, &apos;my-event&apos;, {
           payloadValue: true
         }).then((res) =&gt; {
           result = res;
         });
       });
       after(() =&gt; {
-        initialContext.bucket = bucket;
+        context.bucket = bucket;
       });
       it(&apos;sets no bucket id&apos;, () =&gt; {
         return expect(result.bucketId).to.not.exist;
@@ -163,7 +168,7 @@ describe(&apos;Pipeline&apos;, () =&gt; {
     describe(&apos;overriding context with a bucket object&apos;, () =&gt; {
       let result;
       before(() =&gt; {
-        return pipeline.raise(&apos;my-event&apos;, {
+        return pipeline.raise(context, &apos;my-event&apos;, {
           payloadValue: true
         }, {
           bucket: {
@@ -180,7 +185,7 @@ describe(&apos;Pipeline&apos;, () =&gt; {
     describe(&apos;overriding context with a bucket id&apos;, () =&gt; {
       let result;
       before(() =&gt; {
-        return pipeline.raise(&apos;my-event&apos;, {
+        return pipeline.raise(context, &apos;my-event&apos;, {
           payloadValue: true
         }, {
           bucket: &quot;overridden-bucket-id&quot;

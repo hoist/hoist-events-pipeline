@@ -1,8 +1,8 @@
 window.esdocSearchIndex = [
   [
-    "@hoist/events-pipeline/src/pipeline.js~pipeline",
-    "class/src/pipeline.js~Pipeline.html",
-    "<span>Pipeline</span> <span class=\"search-result-import-path\">@hoist/events-pipeline/src/pipeline.js</span>",
+    "@hoist/events-pipeline/src/pipeline.js~eventspipeline",
+    "class/src/pipeline.js~EventsPipeline.html",
+    "<span>EventsPipeline</span> <span class=\"search-result-import-path\">@hoist/events-pipeline/src/pipeline.js</span>",
     "class"
   ],
   [
@@ -330,7 +330,7 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "pipeline src/pipeline.js~pipeline,pipeline",
+    "pipeline pipeline,pipeline",
     "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber19",
     "Pipeline",
     "test"
@@ -343,103 +343,103 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber131",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber130",
     "Pipeline Pipeline#raise overriding context with a bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber142",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber141",
     "Pipeline Pipeline#raise overriding context with a bucket id sets bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber114",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber113",
     "Pipeline Pipeline#raise overriding context with a bucket object",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber127",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber126",
     "Pipeline Pipeline#raise overriding context with a bucket object sets bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber95",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber94",
     "Pipeline Pipeline#raise without an existing bucket on context",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber110",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber109",
     "Pipeline Pipeline#raise without an existing bucket on context sets no bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber76",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber75",
     "Pipeline Pipeline#raise without an existing event on context",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber91",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber90",
     "Pipeline Pipeline#raise without an existing event on context generates a new correlationId",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber41",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber40",
     "Pipeline Pipeline#raise without context overrid",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber50",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber49",
     "Pipeline Pipeline#raise without context overrid raises an event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber53",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber52",
     "Pipeline Pipeline#raise without context overrid raises the same data as raised",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber57",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber56",
     "Pipeline Pipeline#raise without context overrid sets applicationid on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber60",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber59",
     "Pipeline Pipeline#raise without context overrid sets correlation id on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber63",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber62",
     "Pipeline Pipeline#raise without context overrid sets the bucketid on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber66",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber65",
     "Pipeline Pipeline#raise without context overrid sets the environment on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber72",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber71",
     "Pipeline Pipeline#raise without context overrid sets the event name on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber69",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber68",
     "Pipeline Pipeline#raise without context overrid sets the payload on event",
     "test"
   ],
@@ -450,15 +450,21 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/pipeline.js~pipeline#constructor",
-    "class/src/pipeline.js~Pipeline.html#instance-constructor-constructor",
-    "src/pipeline.js~Pipeline#constructor",
+    "src/pipeline.js~context",
+    "external/index.html",
+    "src/pipeline.js~Context",
+    "external"
+  ],
+  [
+    "src/pipeline.js~eventspipeline#constructor",
+    "class/src/pipeline.js~EventsPipeline.html#instance-constructor-constructor",
+    "src/pipeline.js~EventsPipeline#constructor",
     "method"
   ],
   [
-    "src/pipeline.js~pipeline#raise",
-    "class/src/pipeline.js~Pipeline.html#instance-method-raise",
-    "src/pipeline.js~Pipeline#raise",
+    "src/pipeline.js~eventspipeline#raise",
+    "class/src/pipeline.js~EventsPipeline.html#instance-method-raise",
+    "src/pipeline.js~EventsPipeline#raise",
     "method"
   ],
   [

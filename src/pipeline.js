@@ -9,12 +9,11 @@ import {
   Event
 }
 from '@hoist/model';
-import Context from '@hoist/context';
 
 /**
  * Hoist Pipeline class for raising events
  */
-class Pipeline {
+class EventsPipeline {
   /**
    * create a new pipeline object
    */
@@ -27,10 +26,13 @@ class Pipeline {
 
   /**
    * raise an event with the given name and payload
-   * @
+   * @param {Context} context - the current context
+   * @param {String} eventName - the name of the event to raise
+   * @param {Object} payload - any mata data to save
+   * @returns {Promise<Object>} - the Bucket in object form
    */
-  raise(eventName, payload, overrideContext) {
-    return Context.get().then((context) => {
+  raise(context, eventName, payload, overrideContext) {
+    return Promise.resolve().then(() => {
       var cid;
       if (context.event) {
         cid = context.event.correlationId;
@@ -67,4 +69,8 @@ class Pipeline {
   }
 }
 
-export default Pipeline;
+export default EventsPipeline;
+
+/**
+ * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js
+ */

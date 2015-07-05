@@ -18,30 +18,29 @@ from '@hoist/model';
 /** @test {Pipeline} */
 describe('Pipeline', () => {
   describe('Pipeline#raise', () => {
-    let initialContext;
+    let context;
     let pipeline;
     before(() => {
       Sinon.stub(Publisher.prototype, 'publish').returns(Promise.resolve(null));
       pipeline = new Pipeline();
-      return Context.get().then((context) => {
-        context.event = {
+      context = new Context({
+        event: {
           correlationId: 'correlation-id'
-        };
-        context.bucket = {
+        },
+        bucket: {
           _id: 'bucket-id'
-        };
-        context.application = {
+        },
+        application: {
           _id: 'application-id'
-        };
-        context.environment = 'environment';
-        initialContext = context;
+        },
+        environment: 'environment'
       });
 
     });
     describe('without context overrid', () => {
       let result;
       before(() => {
-        return pipeline.raise('my-event', {
+        return pipeline.raise(context, 'my-event', {
           payloadValue: true
         }).then((res) => {
           result = res;
@@ -77,16 +76,16 @@ describe('Pipeline', () => {
       let result;
       let ev;
       before(() => {
-        ev = initialContext.event;
-        delete initialContext.event;
-        return pipeline.raise('my-event', {
+        ev = context.event;
+        delete context.event;
+        return pipeline.raise(context, 'my-event', {
           payloadValue: true
         }).then((res) => {
           result = res;
         });
       });
       after(() => {
-        initialContext.event = ev;
+        context.event = ev;
       });
       it('generates a new correlationId', () => {
         return expect(result.correlationId).to.exist;
@@ -96,16 +95,16 @@ describe('Pipeline', () => {
       let result;
       let bucket;
       before(() => {
-        bucket = initialContext.bucket;
-        delete initialContext.bucket;
-        return pipeline.raise('my-event', {
+        bucket = context.bucket;
+        delete context.bucket;
+        return pipeline.raise(context, 'my-event', {
           payloadValue: true
         }).then((res) => {
           result = res;
         });
       });
       after(() => {
-        initialContext.bucket = bucket;
+        context.bucket = bucket;
       });
       it('sets no bucket id', () => {
         return expect(result.bucketId).to.not.exist;
@@ -114,7 +113,7 @@ describe('Pipeline', () => {
     describe('overriding context with a bucket object', () => {
       let result;
       before(() => {
-        return pipeline.raise('my-event', {
+        return pipeline.raise(context, 'my-event', {
           payloadValue: true
         }, {
           bucket: {
@@ -131,7 +130,7 @@ describe('Pipeline', () => {
     describe('overriding context with a bucket id', () => {
       let result;
       before(() => {
-        return pipeline.raise('my-event', {
+        return pipeline.raise(context, 'my-event', {
           payloadValue: true
         }, {
           bucket: "overridden-bucket-id"

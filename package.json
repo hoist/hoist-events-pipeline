@@ -1,6 +1,6 @@
 {
   "name": "@hoist/events-pipeline",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hoist's events pipeline",
   "main": "./lib/pipeline.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "@hoist/model": "^1.0.2"
   },
   "devDependencies": {
-    "@hoist/model": "^1.0.2",
     "babel": "^5.5.8",
     "babel-eslint": "^3.1.15",
     "bluebird": "^2.9.30",
