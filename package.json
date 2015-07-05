@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/hoist/hoist-events-pipeline",
   "peerDependencies": {
-    "@hoist/context": "^1.0.1",
     "@hoist/model": "^1.0.2"
   },
   "devDependencies": {
+    "@hoist/context": "^1.0.1",
     "babel": "^5.5.8",
     "babel-eslint": "^3.1.15",
     "bluebird": "^2.9.30",
