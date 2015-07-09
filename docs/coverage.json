@@ -1,10 +1,10 @@
 {
-  "coverage": "100%",
-  "expectCount": 3,
+  "coverage": "75%",
+  "expectCount": 4,
   "actualCount": 3,
   "files": {
     "src/pipeline.js": {
-      "expectCount": 3,
+      "expectCount": 4,
       "actualCount": 3
     }
   }

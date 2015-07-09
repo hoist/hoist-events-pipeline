@@ -6,6 +6,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@hoist/events-pipeline/src/pipeline.js~eventspipeline",
+    "variable/index.html#static-variable-eventsPipeline",
+    "<span>eventsPipeline</span> <span class=\"search-result-import-path\">@hoist/events-pipeline/src/pipeline.js</span>",
+    "variable"
+  ],
+  [
     "builtinexternal/ecmascriptexternal.js~array",
     "external/index.html",
     "BuiltinExternal/ECMAScriptExternal.js~Array",

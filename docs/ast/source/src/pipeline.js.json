@@ -3950,6 +3950,61 @@
       ]
     },
     {
+      "type": "Identifier",
+      "declaration": {
+        "type": "Identifier",
+        "name": "EventsPipeline",
+        "range": [
+          1783,
+          1797
+        ],
+        "loc": {
+          "start": {
+            "line": 72,
+            "column": 15
+          },
+          "end": {
+            "line": 72,
+            "column": 29
+          }
+        }
+      },
+      "range": [
+        1768,
+        1798
+      ],
+      "loc": {
+        "start": {
+          "line": 72,
+          "column": 0
+        },
+        "end": {
+          "line": 72,
+          "column": 30
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n ",
+          "range": [
+            1800,
+            1906
+          ],
+          "loc": {
+            "start": {
+              "line": 74,
+              "column": 0
+            },
+            "end": {
+              "line": 76,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
       "type": "ExportDefaultDeclaration",
       "declaration": {
         "type": "ClassDeclaration",
@@ -7587,6 +7642,96 @@
             }
           }
         ],
+        "__esdoc__pseudo_export": false,
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n ",
+            "range": [
+              1800,
+              1906
+            ],
+            "loc": {
+              "start": {
+                "line": 74,
+                "column": 0
+              },
+              "end": {
+                "line": 76,
+                "column": 3
+              }
+            }
+          }
+        ]
+      },
+      "range": [
+        1768,
+        1798
+      ],
+      "loc": {
+        "start": {
+          "line": 72,
+          "column": 0
+        },
+        "end": {
+          "line": 72,
+          "column": 30
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n ",
+          "range": [
+            1800,
+            1906
+          ],
+          "loc": {
+            "start": {
+              "line": 74,
+              "column": 0
+            },
+            "end": {
+              "line": 76,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "leadingComments": null
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "VariableDeclaration",
+        "kind": "let",
+        "loc": {
+          "start": {
+            "line": 72,
+            "column": 0
+          },
+          "end": {
+            "line": 72,
+            "column": 30
+          }
+        },
+        "declarations": [
+          {
+            "type": "VariableDeclarator",
+            "id": {
+              "type": "Identifier",
+              "name": "eventsPipeline"
+            },
+            "init": {
+              "type": "NewExpression",
+              "callee": {
+                "type": "Identifier",
+                "name": "EventsPipeline"
+              }
+            }
+          }
+        ],
+        "leadingComments": [],
         "trailingComments": [
           {
             "type": "Block",

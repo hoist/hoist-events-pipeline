@@ -27,17 +27,6 @@
     "interface": false
   },
   {
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Context",
-    "externalLink": "https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js",
-    "memberof": "src/pipeline.js",
-    "longname": "src/pipeline.js~Context",
-    "access": null,
-    "description": null
-  },
-  {
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -141,6 +130,37 @@
       "description": "the Bucket in object form"
     },
     "generator": false
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "eventsPipeline",
+    "memberof": "src/pipeline.js",
+    "longname": "src/pipeline.js~eventsPipeline",
+    "access": null,
+    "export": true,
+    "importPath": "@hoist/events-pipeline/src/pipeline.js",
+    "importStyle": "eventsPipeline",
+    "description": null,
+    "lineNumber": 72,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/pipeline.js~EventsPipeline"
+      ]
+    }
+  },
+  {
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Context",
+    "externalLink": "https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js",
+    "memberof": "src/pipeline.js",
+    "longname": "src/pipeline.js~Context",
+    "access": null,
+    "description": null
   },
   {
     "kind": "external",
