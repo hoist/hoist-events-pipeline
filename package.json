@@ -1,6 +1,6 @@
 {
   "name": "@hoist/events-pipeline",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Hoist's events pipeline",
   "main": "./lib/pipeline.js",
   "scripts": {
