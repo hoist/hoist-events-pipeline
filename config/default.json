@@ -1,0 +1,11 @@
+{
+  "Hoist": {
+    "application": {
+      "name": "Hoist Event Pipeline"
+    },
+    "aws": {
+      "region": "us-west-2"
+    },
+    "debug": true
+  }
+}
