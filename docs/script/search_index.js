@@ -349,49 +349,49 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber130",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber133",
     "Pipeline Pipeline#raise overriding context with a bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber141",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber144",
     "Pipeline Pipeline#raise overriding context with a bucket id sets bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber113",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber116",
     "Pipeline Pipeline#raise overriding context with a bucket object",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber126",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber129",
     "Pipeline Pipeline#raise overriding context with a bucket object sets bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber94",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber97",
     "Pipeline Pipeline#raise without an existing bucket on context",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber109",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber112",
     "Pipeline Pipeline#raise without an existing bucket on context sets no bucket id",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber75",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber78",
     "Pipeline Pipeline#raise without an existing event on context",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber90",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber93",
     "Pipeline Pipeline#raise without an existing event on context generates a new correlationId",
     "test"
   ],
@@ -433,19 +433,25 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber65",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber68",
     "Pipeline Pipeline#raise without context overrid sets the environment on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber71",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber74",
     "Pipeline Pipeline#raise without context overrid sets the event name on event",
     "test"
   ],
   [
     "",
-    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber68",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber65",
+    "Pipeline Pipeline#raise without context overrid sets the eventId on event",
+    "test"
+  ],
+  [
+    "",
+    "test-file/tests/unit_tests/pipeline_tests.js.html#lineNumber71",
     "Pipeline Pipeline#raise without context overrid sets the payload on event",
     "test"
   ],

@@ -9,7 +9,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport logger from '@hoist/logger';\nimport {\n  Event\n}\nfrom '@hoist/model';\n\n/**\n * Hoist Pipeline class for raising events\n */\nclass EventsPipeline {\n  /**\n   * create a new pipeline object\n   */\n  constructor() {\n    this._publisher = new Publisher();\n    this._logger = logger.child({\n      cls: this.constructor.name\n    });\n  }\n\n  /**\n   * raise an event with the given name and payload\n   * @param {Context} context - the current context\n   * @param {String} eventName - the name of the event to raise\n   * @param {Object} payload - any mata data to save\n   * @returns {Promise<Object>} - the Bucket in object form\n   */\n  raise(context, eventName, payload, overrideContext) {\n    return Promise.resolve().then(() => {\n      var cid;\n      if (context.event) {\n        cid = context.event.correlationId;\n      }\n      cid = cid || require('uuid').v4();\n      var bucketId;\n      if (context.bucket) {\n        bucketId = context.bucket._id;\n      }\n      this._logger.info('bucketId from context', bucketId);\n      if (overrideContext && overrideContext.bucket) {\n        this._logger.info('overrideing bucketid');\n        if (overrideContext.bucket._id) {\n          bucketId = overrideContext.bucket._id;\n        } else {\n          bucketId = overrideContext.bucket;\n        }\n\n      }\n      this._logger.info('bucketid after override', bucketId);\n      var ev = new Event({\n        applicationId: context.application._id,\n        eventName: eventName,\n        environment: context.environment,\n        bucketId: bucketId,\n        correlationId: cid,\n        payload: payload\n      });\n\n      return this._publisher.publish(ev).then(function () {\n        return ev.toObject();\n      });\n    });\n  }\n}\n\nexport default EventsPipeline;\n\n/**\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n */\n"
+    "content": "'use strict';\n\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport logger from '@hoist/logger';\nimport uuid from 'uuid';\nimport {\n  Event\n}\nfrom '@hoist/model';\n\n/**\n * Hoist Pipeline class for raising events\n */\nclass EventsPipeline {\n  /**\n   * create a new pipeline object\n   */\n  constructor() {\n    this._publisher = new Publisher();\n    this._logger = logger.child({\n      cls: this.constructor.name\n    });\n  }\n\n  /**\n   * raise an event with the given name and payload\n   * @param {Context} context - the current context\n   * @param {String} eventName - the name of the event to raise\n   * @param {Object} payload - any mata data to save\n   * @returns {Promise<Object>} - the Bucket in object form\n   */\n  raise(context, eventName, payload, overrideContext) {\n    return Promise.resolve().then(() => {\n      var cid;\n      if (context.event) {\n        cid = context.event.correlationId;\n      }\n      cid = cid || uuid.v4();\n      var bucketId;\n      if (context.bucket) {\n        bucketId = context.bucket._id;\n      }\n      this._logger.info('bucketId from context', bucketId);\n      if (overrideContext && overrideContext.bucket) {\n        this._logger.info('overrideing bucketid');\n        if (overrideContext.bucket._id) {\n          bucketId = overrideContext.bucket._id;\n        } else {\n          bucketId = overrideContext.bucket;\n        }\n\n      }\n      this._logger.info('bucketid after override', bucketId);\n      var ev = new Event({\n        applicationId: context.application._id,\n        eventId: uuid.v4(),\n        eventName: eventName,\n        environment: context.environment,\n        bucketId: bucketId,\n        correlationId: cid,\n        payload: payload\n      });\n\n      return this._publisher.publish(ev).then(function () {\n        return ev.toObject();\n      });\n    });\n  }\n}\n\nexport default EventsPipeline;\n\n/**\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n */\n"
   },
   {
     "kind": "class",
@@ -23,7 +23,7 @@
     "importPath": "@hoist/events-pipeline/src/pipeline.js",
     "importStyle": "EventsPipeline",
     "description": "Hoist Pipeline class for raising events",
-    "lineNumber": 16,
+    "lineNumber": 17,
     "interface": false
   },
   {
@@ -35,7 +35,7 @@
     "longname": "src/pipeline.js~EventsPipeline#constructor",
     "access": null,
     "description": "create a new pipeline object",
-    "lineNumber": 20,
+    "lineNumber": 21,
     "params": [],
     "generator": false
   },
@@ -48,7 +48,7 @@
     "longname": "src/pipeline.js~EventsPipeline#_publisher",
     "access": null,
     "description": null,
-    "lineNumber": 21,
+    "lineNumber": 22,
     "undocument": true,
     "type": {
       "types": [
@@ -65,7 +65,7 @@
     "longname": "src/pipeline.js~EventsPipeline#_logger",
     "access": null,
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 23,
     "undocument": true,
     "type": {
       "types": [
@@ -82,7 +82,7 @@
     "longname": "src/pipeline.js~EventsPipeline#raise",
     "access": null,
     "description": "raise an event with the given name and payload",
-    "lineNumber": 34,
+    "lineNumber": 35,
     "unknown": [
       {
         "tagName": "@returns",
@@ -143,7 +143,7 @@
     "importPath": "@hoist/events-pipeline/src/pipeline.js",
     "importStyle": "eventsPipeline",
     "description": null,
-    "lineNumber": 72,
+    "lineNumber": 74,
     "undocument": true,
     "type": {
       "types": [
@@ -820,7 +820,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "'use strict';\n\nimport Pipeline from '../../src/pipeline';\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport Context from '@hoist/context';\nimport Sinon from 'sinon';\nimport {\n  expect\n}\nfrom 'chai';\nimport {\n  Event\n}\nfrom '@hoist/model';\n/** @test {Pipeline} */\ndescribe('Pipeline', () => {\n  describe('Pipeline#raise', () => {\n    let context;\n    let pipeline;\n    before(() => {\n      Sinon.stub(Publisher.prototype, 'publish').returns(Promise.resolve(null));\n      pipeline = new Pipeline();\n      context = new Context({\n        event: {\n          correlationId: 'correlation-id'\n        },\n        bucket: {\n          _id: 'bucket-id'\n        },\n        application: {\n          _id: 'application-id'\n        },\n        environment: 'environment'\n      });\n\n    });\n    describe('without context overrid', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('raises an event', () => {\n        return expect(Publisher.prototype.publish).to.have.been.calledWith(Sinon.match.instanceOf(Event));\n      });\n      it('raises the same data as raised', () => {\n        let raisedEvent = Publisher.prototype.publish.firstCall.args[0];\n        return expect(raisedEvent.toObject()).to.eql(result);\n      });\n      it('sets applicationid on event', () => {\n        return expect(result.applicationId).to.eql('application-id');\n      });\n      it('sets correlation id on event', () => {\n        return expect(result.correlationId).to.eql('correlation-id');\n      });\n      it('sets the bucketid on event', () => {\n        return expect(result.bucketId).to.eql('bucket-id');\n      });\n      it('sets the environment on event', () => {\n        return expect(result.environment).to.eql('environment');\n      });\n      it('sets the payload on event', () => {\n        return expect(result.payload.payloadValue).to.eql(true);\n      });\n      it('sets the event name on event', () => {\n        return expect(result.eventName).to.eql('my-event');\n      });\n    });\n    describe('without an existing event on context', () => {\n      let result;\n      let ev;\n      before(() => {\n        ev = context.event;\n        delete context.event;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.event = ev;\n      });\n      it('generates a new correlationId', () => {\n        return expect(result.correlationId).to.exist;\n      });\n    });\n    describe('without an existing bucket on context', () => {\n      let result;\n      let bucket;\n      before(() => {\n        bucket = context.bucket;\n        delete context.bucket;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.bucket = bucket;\n      });\n      it('sets no bucket id', () => {\n        return expect(result.bucketId).to.not.exist;\n      });\n    });\n    describe('overriding context with a bucket object', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: {\n            _id: \"overridden-bucket-id\"\n          }\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n    describe('overriding context with a bucket id', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: \"overridden-bucket-id\"\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n  });\n});\n"
+    "content": "'use strict';\n\nimport Pipeline from '../../src/pipeline';\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport Context from '@hoist/context';\nimport Sinon from 'sinon';\nimport {\n  expect\n}\nfrom 'chai';\nimport {\n  Event\n}\nfrom '@hoist/model';\n/** @test {Pipeline} */\ndescribe('Pipeline', () => {\n  describe('Pipeline#raise', () => {\n    let context;\n    let pipeline;\n    before(() => {\n      Sinon.stub(Publisher.prototype, 'publish').returns(Promise.resolve(null));\n      pipeline = new Pipeline();\n      context = new Context({\n        event: {\n          correlationId: 'correlation-id'\n        },\n        bucket: {\n          _id: 'bucket-id'\n        },\n        application: {\n          _id: 'application-id'\n        },\n        environment: 'environment'\n      });\n\n    });\n    describe('without context overrid', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('raises an event', () => {\n        return expect(Publisher.prototype.publish).to.have.been.calledWith(Sinon.match.instanceOf(Event));\n      });\n      it('raises the same data as raised', () => {\n        let raisedEvent = Publisher.prototype.publish.firstCall.args[0];\n        return expect(raisedEvent.toObject()).to.eql(result);\n      });\n      it('sets applicationid on event', () => {\n        return expect(result.applicationId).to.eql('application-id');\n      });\n      it('sets correlation id on event', () => {\n        return expect(result.correlationId).to.eql('correlation-id');\n      });\n      it('sets the bucketid on event', () => {\n        return expect(result.bucketId).to.eql('bucket-id');\n      });\n      it('sets the eventId on event', () => {\n        return expect(result.eventId).to.exist;\n      });\n      it('sets the environment on event', () => {\n        return expect(result.environment).to.eql('environment');\n      });\n      it('sets the payload on event', () => {\n        return expect(result.payload.payloadValue).to.eql(true);\n      });\n      it('sets the event name on event', () => {\n        return expect(result.eventName).to.eql('my-event');\n      });\n    });\n    describe('without an existing event on context', () => {\n      let result;\n      let ev;\n      before(() => {\n        ev = context.event;\n        delete context.event;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.event = ev;\n      });\n      it('generates a new correlationId', () => {\n        return expect(result.correlationId).to.exist;\n      });\n    });\n    describe('without an existing bucket on context', () => {\n      let result;\n      let bucket;\n      before(() => {\n        bucket = context.bucket;\n        delete context.bucket;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.bucket = bucket;\n      });\n      it('sets no bucket id', () => {\n        return expect(result.bucketId).to.not.exist;\n      });\n    });\n    describe('overriding context with a bucket object', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: {\n            _id: \"overridden-bucket-id\"\n          }\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n    describe('overriding context with a bucket id', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: \"overridden-bucket-id\"\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n  });\n});\n"
   },
   {
     "kind": "testDescribe",
@@ -945,7 +945,7 @@
     "testDepth": 3,
     "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe2.it8",
     "access": null,
-    "description": "sets the environment on event",
+    "description": "sets the eventId on event",
     "lineNumber": 65
   },
   {
@@ -958,7 +958,7 @@
     "testDepth": 3,
     "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe2.it9",
     "access": null,
-    "description": "sets the payload on event",
+    "description": "sets the environment on event",
     "lineNumber": 68
   },
   {
@@ -971,111 +971,124 @@
     "testDepth": 3,
     "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe2.it10",
     "access": null,
-    "description": "sets the event name on event",
+    "description": "sets the payload on event",
     "lineNumber": 71
   },
   {
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it11",
+    "testId": 11,
+    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe2",
+    "testDepth": 3,
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe2.it11",
+    "access": null,
+    "description": "sets the event name on event",
+    "lineNumber": 74
+  },
+  {
     "kind": "testDescribe",
     "static": true,
     "variation": null,
-    "name": "describe11",
-    "testId": 11,
+    "name": "describe12",
+    "testId": 12,
     "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1",
     "testDepth": 2,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe11",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe12",
     "access": null,
     "description": "without an existing event on context",
-    "lineNumber": 75
+    "lineNumber": 78
   },
   {
     "kind": "testIt",
     "static": true,
     "variation": null,
-    "name": "it12",
-    "testId": 12,
-    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe11",
+    "name": "it13",
+    "testId": 13,
+    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe12",
     "testDepth": 3,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe11.it12",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe12.it13",
     "access": null,
     "description": "generates a new correlationId",
-    "lineNumber": 90
+    "lineNumber": 93
   },
   {
     "kind": "testDescribe",
     "static": true,
     "variation": null,
-    "name": "describe13",
-    "testId": 13,
+    "name": "describe14",
+    "testId": 14,
     "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1",
     "testDepth": 2,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe13",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe14",
     "access": null,
     "description": "without an existing bucket on context",
-    "lineNumber": 94
+    "lineNumber": 97
   },
   {
     "kind": "testIt",
     "static": true,
     "variation": null,
-    "name": "it14",
-    "testId": 14,
-    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe13",
+    "name": "it15",
+    "testId": 15,
+    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe14",
     "testDepth": 3,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe13.it14",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe14.it15",
     "access": null,
     "description": "sets no bucket id",
-    "lineNumber": 109
+    "lineNumber": 112
   },
   {
     "kind": "testDescribe",
     "static": true,
     "variation": null,
-    "name": "describe15",
-    "testId": 15,
+    "name": "describe16",
+    "testId": 16,
     "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1",
     "testDepth": 2,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe15",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe16",
     "access": null,
     "description": "overriding context with a bucket object",
-    "lineNumber": 113
+    "lineNumber": 116
   },
   {
     "kind": "testIt",
     "static": true,
     "variation": null,
-    "name": "it16",
-    "testId": 16,
-    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe15",
+    "name": "it17",
+    "testId": 17,
+    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe16",
     "testDepth": 3,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe15.it16",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe16.it17",
     "access": null,
     "description": "sets bucket id",
-    "lineNumber": 126
+    "lineNumber": 129
   },
   {
     "kind": "testDescribe",
     "static": true,
     "variation": null,
-    "name": "describe17",
-    "testId": 17,
+    "name": "describe18",
+    "testId": 18,
     "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1",
     "testDepth": 2,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe17",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe18",
     "access": null,
     "description": "overriding context with a bucket id",
-    "lineNumber": 130
+    "lineNumber": 133
   },
   {
     "kind": "testIt",
     "static": true,
     "variation": null,
-    "name": "it18",
-    "testId": 18,
-    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe17",
+    "name": "it19",
+    "testId": 19,
+    "memberof": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe18",
     "testDepth": 3,
-    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe17.it18",
+    "longname": "tests/unit_tests/pipeline_tests.js~describe0.describe1.describe18.it19",
     "access": null,
     "description": "sets bucket id",
-    "lineNumber": 141
+    "lineNumber": 144
   }
 ]

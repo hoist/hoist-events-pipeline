@@ -5,6 +5,7 @@ import {
 }
 from '@hoist/broker';
 import logger from '@hoist/logger';
+import uuid from 'uuid';
 import {
   Event
 }
@@ -37,7 +38,7 @@ class EventsPipeline {
       if (context.event) {
         cid = context.event.correlationId;
       }
-      cid = cid || require('uuid').v4();
+      cid = cid || uuid.v4();
       var bucketId;
       if (context.bucket) {
         bucketId = context.bucket._id;
@@ -55,6 +56,7 @@ class EventsPipeline {
       this._logger.info('bucketid after override', bucketId);
       var ev = new Event({
         applicationId: context.application._id,
+        eventId: uuid.v4(),
         eventName: eventName,
         environment: context.environment,
         bucketId: bucketId,

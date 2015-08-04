@@ -123,6 +123,9 @@ describe(&apos;Pipeline&apos;, () =&gt; {
       it(&apos;sets the bucketid on event&apos;, () =&gt; {
         return expect(result.bucketId).to.eql(&apos;bucket-id&apos;);
       });
+      it(&apos;sets the eventId on event&apos;, () =&gt; {
+        return expect(result.eventId).to.exist;
+      });
       it(&apos;sets the environment on event&apos;, () =&gt; {
         return expect(result.environment).to.eql(&apos;environment&apos;);
       });
