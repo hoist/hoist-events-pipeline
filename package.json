@@ -52,7 +52,7 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "@hoist/broker": "1.0.15",
+    "@hoist/broker": "^1.0.17",
     "@hoist/logger": "^1.0.0",
     "uuid": "^2.0.1"
   }
