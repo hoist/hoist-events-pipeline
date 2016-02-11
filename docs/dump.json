@@ -1,5 +1,6 @@
 [
   {
+    "__docId__": 0,
     "kind": "file",
     "static": true,
     "variation": null,
@@ -12,6 +13,7 @@
     "content": "'use strict';\n\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport logger from '@hoist/logger';\nimport uuid from 'uuid';\nimport {\n  Event\n}\nfrom '@hoist/model';\n\n/**\n * Hoist Pipeline class for raising events\n */\nclass EventsPipeline {\n  /**\n   * create a new pipeline object\n   */\n  constructor() {\n    this._publisher = new Publisher();\n    this._logger = logger.child({\n      cls: this.constructor.name\n    });\n  }\n\n  /**\n   * raise an event with the given name and payload\n   * @param {Context} context - the current context\n   * @param {String} eventName - the name of the event to raise\n   * @param {Object} payload - any mata data to save\n   * @returns {Promise<Object>} - the Bucket in object form\n   */\n  raise(context, eventName, payload, overrideContext) {\n    return Promise.resolve().then(() => {\n      var cid;\n      if (context.event) {\n        cid = context.event.correlationId;\n      }\n      cid = cid || uuid.v4();\n      var bucketId;\n      if (context.bucket) {\n        bucketId = context.bucket._id;\n      }\n      this._logger.info('bucketId from context', bucketId);\n      if (overrideContext && overrideContext.bucket) {\n        this._logger.info('overrideing bucketid');\n        if (overrideContext.bucket._id) {\n          bucketId = overrideContext.bucket._id;\n        } else {\n          bucketId = overrideContext.bucket;\n        }\n\n      }\n      this._logger.info('bucketid after override', bucketId);\n      var ev = new Event({\n        applicationId: context.application._id,\n        eventId: uuid.v4(),\n        eventName: eventName,\n        environment: context.environment,\n        bucketId: bucketId,\n        correlationId: cid,\n        payload: payload\n      });\n\n      return this._publisher.publish(ev).then(function () {\n        return ev.toObject();\n      });\n    });\n  }\n}\n\nexport default EventsPipeline;\n\n/**\n * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js\n */\n"
   },
   {
+    "__docId__": 1,
     "kind": "class",
     "static": true,
     "variation": null,
@@ -27,6 +29,19 @@
     "interface": false
   },
   {
+    "__docId__": 2,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Context",
+    "externalLink": "https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js",
+    "memberof": "src/pipeline.js",
+    "longname": "src/pipeline.js~Context",
+    "access": null,
+    "description": null
+  },
+  {
+    "__docId__": 3,
     "kind": "constructor",
     "static": false,
     "variation": null,
@@ -40,6 +55,7 @@
     "generator": false
   },
   {
+    "__docId__": 4,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -57,6 +73,7 @@
     }
   },
   {
+    "__docId__": 5,
     "kind": "member",
     "static": false,
     "variation": null,
@@ -74,6 +91,7 @@
     }
   },
   {
+    "__docId__": 6,
     "kind": "method",
     "static": false,
     "variation": null,
@@ -132,37 +150,7 @@
     "generator": false
   },
   {
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "eventsPipeline",
-    "memberof": "src/pipeline.js",
-    "longname": "src/pipeline.js~eventsPipeline",
-    "access": null,
-    "export": true,
-    "importPath": "@hoist/events-pipeline/src/pipeline.js",
-    "importStyle": "eventsPipeline",
-    "description": null,
-    "lineNumber": 74,
-    "undocument": true,
-    "type": {
-      "types": [
-        "src/pipeline.js~EventsPipeline"
-      ]
-    }
-  },
-  {
-    "kind": "external",
-    "static": true,
-    "variation": null,
-    "name": "Context",
-    "externalLink": "https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js",
-    "memberof": "src/pipeline.js",
-    "longname": "src/pipeline.js~Context",
-    "access": null,
-    "description": null
-  },
-  {
+    "__docId__": 8,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -175,6 +163,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 9,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -187,6 +176,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 10,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -199,6 +189,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 11,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -211,6 +202,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 12,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -223,6 +215,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 13,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -235,6 +228,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 14,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -247,6 +241,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 15,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -259,6 +254,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 16,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -271,6 +267,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 17,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -283,6 +280,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 18,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -295,6 +293,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 19,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -307,6 +306,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 20,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -319,6 +319,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 21,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -331,6 +332,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 22,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -343,6 +345,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 23,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -355,6 +358,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 24,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -367,6 +371,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 25,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -379,6 +384,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 26,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -391,6 +397,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 27,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -403,6 +410,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 28,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -415,6 +423,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 29,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -427,6 +436,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 30,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -439,6 +449,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 31,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -451,6 +462,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 32,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -463,6 +475,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 33,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -475,6 +488,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 34,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -487,6 +501,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 35,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -499,6 +514,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 36,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -511,6 +527,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 37,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -523,6 +540,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 38,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -535,6 +553,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 39,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -547,6 +566,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 40,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -559,6 +579,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 41,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -571,6 +592,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 42,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -583,6 +605,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 43,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -595,6 +618,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 44,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -607,6 +631,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 45,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -619,6 +644,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 46,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -631,6 +657,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 47,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -643,6 +670,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 48,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -655,6 +683,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 49,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -667,6 +696,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 50,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -679,6 +709,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 51,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -691,6 +722,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 52,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -703,6 +735,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 53,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -715,6 +748,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 54,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -727,6 +761,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 56,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -739,6 +774,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 57,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -751,6 +787,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 58,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -763,6 +800,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 59,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -775,6 +813,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 60,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -787,6 +826,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 61,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -799,6 +839,7 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 62,
     "kind": "external",
     "static": true,
     "variation": null,
@@ -811,6 +852,20 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
     "kind": "testFile",
     "static": true,
     "variation": null,
@@ -823,6 +878,7 @@
     "content": "'use strict';\n\nimport Pipeline from '../../src/pipeline';\nimport {\n  Publisher\n}\nfrom '@hoist/broker';\nimport Context from '@hoist/context';\nimport Sinon from 'sinon';\nimport {\n  expect\n}\nfrom 'chai';\nimport {\n  Event\n}\nfrom '@hoist/model';\n/** @test {Pipeline} */\ndescribe('Pipeline', () => {\n  describe('Pipeline#raise', () => {\n    let context;\n    let pipeline;\n    before(() => {\n      Sinon.stub(Publisher.prototype, 'publish').returns(Promise.resolve(null));\n      pipeline = new Pipeline();\n      context = new Context({\n        event: {\n          correlationId: 'correlation-id'\n        },\n        bucket: {\n          _id: 'bucket-id'\n        },\n        application: {\n          _id: 'application-id'\n        },\n        environment: 'environment'\n      });\n\n    });\n    describe('without context overrid', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('raises an event', () => {\n        return expect(Publisher.prototype.publish).to.have.been.calledWith(Sinon.match.instanceOf(Event));\n      });\n      it('raises the same data as raised', () => {\n        let raisedEvent = Publisher.prototype.publish.firstCall.args[0];\n        return expect(raisedEvent.toObject()).to.eql(result);\n      });\n      it('sets applicationid on event', () => {\n        return expect(result.applicationId).to.eql('application-id');\n      });\n      it('sets correlation id on event', () => {\n        return expect(result.correlationId).to.eql('correlation-id');\n      });\n      it('sets the bucketid on event', () => {\n        return expect(result.bucketId).to.eql('bucket-id');\n      });\n      it('sets the eventId on event', () => {\n        return expect(result.eventId).to.exist;\n      });\n      it('sets the environment on event', () => {\n        return expect(result.environment).to.eql('environment');\n      });\n      it('sets the payload on event', () => {\n        return expect(result.payload.payloadValue).to.eql(true);\n      });\n      it('sets the event name on event', () => {\n        return expect(result.eventName).to.eql('my-event');\n      });\n    });\n    describe('without an existing event on context', () => {\n      let result;\n      let ev;\n      before(() => {\n        ev = context.event;\n        delete context.event;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.event = ev;\n      });\n      it('generates a new correlationId', () => {\n        return expect(result.correlationId).to.exist;\n      });\n    });\n    describe('without an existing bucket on context', () => {\n      let result;\n      let bucket;\n      before(() => {\n        bucket = context.bucket;\n        delete context.bucket;\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }).then((res) => {\n          result = res;\n        });\n      });\n      after(() => {\n        context.bucket = bucket;\n      });\n      it('sets no bucket id', () => {\n        return expect(result.bucketId).to.not.exist;\n      });\n    });\n    describe('overriding context with a bucket object', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: {\n            _id: \"overridden-bucket-id\"\n          }\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n    describe('overriding context with a bucket id', () => {\n      let result;\n      before(() => {\n        return pipeline.raise(context, 'my-event', {\n          payloadValue: true\n        }, {\n          bucket: \"overridden-bucket-id\"\n        }).then((res) => {\n          result = res;\n        });\n      });\n      it('sets bucket id', () => {\n        return expect(result.bucketId).to.eql('overridden-bucket-id');\n      });\n    });\n  });\n});\n"
   },
   {
+    "__docId__": 65,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -845,6 +901,7 @@
     ]
   },
   {
+    "__docId__": 66,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -858,6 +915,7 @@
     "lineNumber": 20
   },
   {
+    "__docId__": 67,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -871,6 +929,7 @@
     "lineNumber": 40
   },
   {
+    "__docId__": 68,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -884,6 +943,7 @@
     "lineNumber": 49
   },
   {
+    "__docId__": 69,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -897,6 +957,7 @@
     "lineNumber": 52
   },
   {
+    "__docId__": 70,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -910,6 +971,7 @@
     "lineNumber": 56
   },
   {
+    "__docId__": 71,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -923,6 +985,7 @@
     "lineNumber": 59
   },
   {
+    "__docId__": 72,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -936,6 +999,7 @@
     "lineNumber": 62
   },
   {
+    "__docId__": 73,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -949,6 +1013,7 @@
     "lineNumber": 65
   },
   {
+    "__docId__": 74,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -962,6 +1027,7 @@
     "lineNumber": 68
   },
   {
+    "__docId__": 75,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -975,6 +1041,7 @@
     "lineNumber": 71
   },
   {
+    "__docId__": 76,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -988,6 +1055,7 @@
     "lineNumber": 74
   },
   {
+    "__docId__": 77,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -1001,6 +1069,7 @@
     "lineNumber": 78
   },
   {
+    "__docId__": 78,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -1014,6 +1083,7 @@
     "lineNumber": 93
   },
   {
+    "__docId__": 79,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -1027,6 +1097,7 @@
     "lineNumber": 97
   },
   {
+    "__docId__": 80,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -1040,6 +1111,7 @@
     "lineNumber": 112
   },
   {
+    "__docId__": 81,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -1053,6 +1125,7 @@
     "lineNumber": 116
   },
   {
+    "__docId__": 82,
     "kind": "testIt",
     "static": true,
     "variation": null,
@@ -1066,6 +1139,7 @@
     "lineNumber": 129
   },
   {
+    "__docId__": 83,
     "kind": "testDescribe",
     "static": true,
     "variation": null,
@@ -1079,6 +1153,7 @@
     "lineNumber": 133
   },
   {
+    "__docId__": 84,
     "kind": "testIt",
     "static": true,
     "variation": null,
