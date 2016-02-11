@@ -30,6 +30,7 @@ class EventsPipeline {
    * @param {Context} context - the current context
    * @param {String} eventName - the name of the event to raise
    * @param {Object} payload - any mata data to save
+   * @param {Object} overrideContext - context override data
    * @returns {Promise<Object>} - the Bucket in object form
    */
   raise(context, eventName, payload, overrideContext) {
