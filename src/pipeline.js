@@ -45,6 +45,7 @@ class EventsPipeline {
         bucketId = context.bucket._id;
       }
       this._logger.info('bucketId from context', bucketId);
+      overrideContext = overrideContext || {};
       if (overrideContext && overrideContext.bucket) {
         this._logger.info('overrideing bucketid');
         if (overrideContext.bucket._id) {
@@ -58,6 +59,7 @@ class EventsPipeline {
       var ev = new Event({
         applicationId: context.application._id,
         eventId: uuid.v4(),
+        priority: overrideContext.priority || 3,
         eventName: eventName,
         environment: context.environment,
         bucketId: bucketId,
@@ -72,7 +74,8 @@ class EventsPipeline {
   }
 }
 
-export default EventsPipeline;
+export
+default EventsPipeline;
 
 /**
  * @external {Context} https://github.com/hoist/hoist-context/blob/feature/remove_cls/src/index.js

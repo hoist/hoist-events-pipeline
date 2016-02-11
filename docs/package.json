@@ -1,6 +1,6 @@
 {
   "name": "@hoist/events-pipeline",
-  "version": "3.0.0-pre.0",
+  "version": "3.0.0-pre.1",
   "description": "Hoist's events pipeline",
   "main": "./lib/pipeline.js",
   "scripts": {
@@ -51,6 +51,7 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
+    "@hoist/errors": "^2.0.0-pre.1",
     "@hoist/broker": "^2.0.0-pre.4",
     "@hoist/logger": "^1.1.0",
     "@hoist/model": "^2.0.0-pre.8",

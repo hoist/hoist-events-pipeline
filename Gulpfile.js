@@ -1,26 +1,24 @@
 'use strict';
 var gulp = require('gulp');
 var requireDir = require('require-dir');
-var runSequence = require('run-sequence');
 require('git-guppy')(gulp);
 var helpers = require('./gulp/helpers');
 
 requireDir('./gulp/tasks', {
   recurse: true
 });
-gulp.task('test', function (cb) {
-  runSequence('clean-coverage', 'transpile', ['eslint-build', 'mocha-server'], () => {
-    cb(helpers.getError());
-  });
+gulp.task('test', ['transpile', 'eslint-build', 'mocha-server'], function (cb) {
+
+
+  cb(helpers.getError());
 });
 gulp.task('default', function () {
-  return gulp.start('test');
+  return gulp.start('eslint-build',
+    'mocha-server');
 });
 
-gulp.task('post-commit', ['test'], () => {
+gulp.task('post-commit', ['test', 'esdoc']);
 
-});
+gulp.task('pre-commit', ['transpile'], function () {
 
-gulp.task('pre-commit', ['transpile'], function (cb) {
-  runSequence('clean', ['transpile', 'esdoc'], cb);
 });
