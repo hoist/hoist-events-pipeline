@@ -1,6 +1,6 @@
 {
   "name": "@hoist/events-pipeline",
-  "version": "3.0.0-pre.2",
+  "version": "3.0.0",
   "description": "Hoist's events pipeline",
   "main": "./lib/pipeline.js",
   "scripts": {
@@ -53,9 +53,9 @@
   },
   "dependencies": {
     "@hoist/broker": "^2.0.1",
-    "@hoist/errors": "^2.0.0-pre.1",
+    "@hoist/errors": "^2.0.1",
     "@hoist/logger": "^1.1.0",
-    "@hoist/model": "^2.0.0-pre.8",
+    "@hoist/model": "^2.0.0",
     "uuid": "^2.0.1"
   }
 }
